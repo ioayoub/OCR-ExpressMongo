@@ -1,8 +1,9 @@
 db.txt
+yarn.lock
 
 #Node modules
 /frontend/node_modules
+
 /backend/node_modules
 /backend/yarn.lock
-
-yarn.lock
+/backend/secrets.js

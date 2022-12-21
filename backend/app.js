@@ -2,13 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import stuffRoutes from "./routes/stuff.js";
+import secrets from "./secrets.js";
 
 // Connect to MongoDB
 mongoose.set("strictQuery", false);
 
 mongoose
   .connect(
-    "mongodb+srv://mongo_admin:mongo_admin123@cluster0.smxvuc1.mongodb.net/test",
+    "mongodb+srv://" + secrets.db_user + ":" + secrets.db_password + "@" + secrets.db_link,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
