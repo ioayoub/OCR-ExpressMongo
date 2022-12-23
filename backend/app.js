@@ -1,8 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import stuffRoutes from "./routes/stuff.js";
 import secrets from "./secrets.js";
+import stuffRoutes from "./routes/stuff.js";
+import userRoutes from "./routes/user.js";
 
 // Connect to MongoDB
 mongoose.set("strictQuery", false);
@@ -34,5 +35,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 export default app;
