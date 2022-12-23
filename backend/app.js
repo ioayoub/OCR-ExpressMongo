@@ -19,6 +19,7 @@ mongoose
 //Express
 const app = express();
 
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -33,8 +34,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 export default app;
