@@ -96,22 +96,25 @@ const updateThing = (req, res, next) => {
 // };
 
 const deleteThing = (req, res, next) => {
-  Thing.findOne({ _id: req.params.id})
-      .then(thing => {
-          if (thing.userId != req.auth.userId) {
-              res.status(401).json({message: 'Not authorized'});
-          } else {
-              const filename = thing.imageUrl.split('/images/')[1];
-              fs.unlink(`images/${filename}`, () => {
-                  Thing.deleteOne({_id: req.params.id})
-                      .then(() => { res.status(200).json({message: 'Objet supprimé !'})})
-                      .catch(error => res.status(401).json({ error }));
-              });
-          }
-      })
-      .catch( error => {
-          res.status(500).json({ error });
-      });
+  Thing.findOne({ _id: req.params.id })
+    .then((thing) => {
+      if (thing.userId != req.auth.userId) {
+        res.status(401).json({ message: "Not authorized" });
+      } else {
+        const filename = thing.imageUrl.split("/images/")[1];
+        //Supprime le fichier image
+        fs.unlink(`images/${filename}`, () => {
+          Thing.deleteOne({ _id: req.params.id })
+            .then(() => {
+              res.status(200).json({ message: "Objet supprimé !" });
+            })
+            .catch((error) => res.status(401).json({ error }));
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 };
 
 export default {
